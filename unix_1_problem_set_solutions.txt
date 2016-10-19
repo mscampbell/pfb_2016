@@ -1,0 +1,107 @@
+1.
+links for this are here: https://github.com/mscampbell/pfb_2016.git
+
+2.
+Commands
+#------------------
+cd ~
+pwd
+
+output
+#------------------
+/pfbhome/mcampbell
+
+3.
+go up one directory
+#------------------
+cd ../
+
+list the files in long form and use grep with the -c option 
+#------------------
+ls -l | grep -cP '^-'
+
+output
+#------------------
+2 regular files in the directory
+
+count list the directories and count the word
+#------------------
+ls -d */ | wc -w
+
+output
+#------------------
+37 directories in the directory
+
+4.
+make the sequences.fasta file
+#------------------
+emacs sequences.fasta
+
+#while the editor is open copy and past the sequence in
+
+>seqName description
+ATGGCGTCTTGGCCTTAAAAGCTC
+
+C-x C-s #save in emacs
+C-x C-c #close in emacs
+
+5.
+Count the lines (this counts new line characters so if there is not a new line character at the end of the last line it will return one less than it should. if there are blank lines it will count them as lines)
+#------------------
+wc -l sequences.fasta 
+2 sequences.fasta
+
+Count the characters
+#------------------
+wc -c sequences.fasta
+46 sequences.fasta
+
+Print the first line of the file to the screen
+#------------------
+head -n 1 sequences.fasta
+>seqName description
+
+Print the last three lines of the file to the screen
+#------------------
+tail -n 3 sequences.fasta
+>seqName description
+ATGGCGTCTTGGCCTTAAAAGCTC
+
+(the file only has two lines so all of them are printed)
+
+6. mv sequences.fasta problem1_sequence.fasta
+
+7. make the fasta directory
+#------------------
+mkdir fasta
+
+8. copy the file the file
+#------------------
+cp problem1_sequence.fasta fasta/
+
+9. look in fasta to see if the copy worked
+#------------------
+ls fasta/
+problem1_sequence.fasta
+
+10. remove the original
+#------------------
+rm problem1_sequence.fasta
+
+11.
+man rm
+man cp
+
+12. print your history to a file
+#------------------
+history > unixBasics.history.txt
+
+13.
+sort the file (log fold change highest to lowest) then print out only the first 100 lines. Save in a file called top100.sorted.cuffdiff.out
+#------------------
+sort -n -r -k 10 /pfbhome/data/cuffdiff.txt | column -t | head -n 100 > top100.sorted.cuffdiff.out
+
+sort the file, print only first column. Get a unique list of the genes, then print only the top 100. Save in a file called differentially.expressed.genes.txt
+#------------------
+sort -n -r -k 10 /pfbhome/data/cuffdiff.txt |cut -f1 | uniq | column -t | head -n 100 > differentially.expressed.genes.txt
+
